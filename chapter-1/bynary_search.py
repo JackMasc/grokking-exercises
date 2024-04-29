@@ -3,14 +3,16 @@ import sys
 
 def binary(number, mylist):
     iterations = 0
-    while len(mylist) >= 1:
+    min_index = 0
+    max_index = len(mylist) - 1
+    while max_index - min_index >= 1:
         iterations += 1
-        half_number = (mylist[0] + mylist[-1]) / 2
-        if number > half_number:
-            mylist = [num for num in mylist if num > half_number]
-        elif number < half_number:
-            mylist = [num for num in mylist if num < half_number]
-        elif number == half_number:
+        half_index = (min_index + max_index) // 2
+        if number > mylist[half_index]:
+            min_index = half_index + 1
+        elif number < mylist[half_index]:
+            max_index = half_index - 1
+        elif number == mylist[half_index]:
             return iterations
         else:
             return None
